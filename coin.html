@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 p-4 text-center text-lg font-bold">
+        <a href="index.html" class="text-blue-400">← Back to Home</a>
+    </nav>
+
+    <!-- Coin Details -->
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-lg">
+        <h1 id="coin-name" class="text-2xl font-bold text-center"></h1>
+        <p id="coin-symbol" class="text-center text-gray-400"></p>
+        <div class="text-center mt-4">
+            <img id="coin-image" class="w-20 h-20 mx-auto">
+        </div>
+        <p id="coin-price" class="text-center text-xl mt-4 font-semibold"></p>
+        <p id="coin-marketcap" class="text-center text-gray-300"></p>
+    </div>
+
+    <!-- Chart -->
+    <div class="mt-10 max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-center text-white mb-4">Price Trend</h2>
+        <canvas id="coinChart"></canvas>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+            <div class="flex items-center space-x-2">
+                <img src="https://cdn.pixabay.com/photo/2021/05/09/13/10/finance-6240949_640.png"
+                    alt="Crypto Tracker Logo" class="w-8 h-8">
+                <span class="text-lg font-semibold">Crypto Tracker</span>
+            </div>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">Home</a>
+                <a href="about.html" class="text-gray-400 hover:text-blue-400 transition">About</a>
+                <a href="market.html" class="text-gray-400 hover:text-blue-400 transition">Market</a>
+                <a href="news.html" class="text-gray-400 hover:text-blue-400 transition">News</a>
+                <a href="contact.html" class="text-gray-400 hover:text-blue-400 transition">Contact</a>
+            </div>
+            <div class="text-gray-500 text-sm mt-4 md:mt-0">
+                <p>&copy; 2025 Crypto Tracker. All Rights Reserved.</p>
+                <p>Powered by <a href="https://www.coingecko.com/" target="_blank"
+                        class="text-blue-400 hover:underline">CoinGecko API</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fetch coin ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const coinId = params.get("coinId");
+
+        if (!coinId) {
+            document.body.innerHTML = "<h1 class='text-center mt-10 text-red-500'>Invalid Coin</h1>";
+        } else {
+            fetchCoinDetails(coinId);
+        }
+
+        function fetchCoinDetails(coinId) {
+            fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("coin-name").innerText = data.name;
+                    document.getElementById("coin-symbol").innerText = `(${data.symbol.toUpperCase()})`;
+                    document.getElementById("coin-image").src = data.image.large;
+                    document.getElementById("coin-price").innerText = `Current Price: $${data.market_data.current_price.usd}`;
+                    document.getElementById("coin-marketcap").innerText = `Market Cap: $${data.market_data.market_cap.usd}`;
+
+                    // Chart Data
+                    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`)
+                        .then(res => res.json())
+                        .then(chartData => {
+                            const ctx = document.getElementById('coinChart').getContext('2d');
+                            new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: chartData.prices.map(price => new Date(price[0]).toLocaleDateString()),
+                                    datasets: [{
+                                        label: 'Price (USD)',
+                                        data: chartData.prices.map(price => price[1]),
+                                        borderColor: '#3b82f6',
+                                        borderWidth: 2,
+                                        fill: false
+                                    }]
+                                }
+                            });
+                        });
+                })
+                .catch(() => document.body.innerHTML = "<h1 class='text-center mt-10 text-red-500'>Coin Not Found</h1>");
+        }
+    </script>
+
+</body>
+
+</html>

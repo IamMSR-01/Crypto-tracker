@@ -19,6 +19,7 @@ const displayCryptoData = (filteredData) => {
 
     filteredData.forEach(coin => {
         const row = document.createElement("tr");
+        row.setAttribute("data-coin-id", coin.id);
         row.innerHTML = `
             <td class="p-2 flex items-center">
                 <img src="${coin.image}" alt="${coin.name}" class="w-6 h-6 mr-2">
@@ -39,6 +40,14 @@ const displayCryptoData = (filteredData) => {
         generateMiniGraph(`chart-${coin.id}`, coin.sparkline_in_7d?.price || []);
     });
 };
+
+document.getElementById("crypto-table").addEventListener("click", function(e) {
+    let targetRow = e.target.closest("tr"); // ✅ Nearest `tr` find karega
+    if (targetRow && targetRow.dataset.coinId) {
+        window.location.href = `coin.html?coinId=${targetRow.dataset.coinId}`;
+    }
+});
+
 
 // ✅ Search Filter Function
 document.getElementById("search").addEventListener("input", (e) => {
@@ -145,3 +154,11 @@ fetchCryptoData();
         document.body.classList.toggle("bg-white");
         document.body.classList.toggle("text-black");
     });
+
+    document.getElementById("crypto-table").addEventListener("click", function(e) {
+        if (e.target.closest("tr")) {
+            const coinId = e.target.closest("tr").dataset.coinId;
+            window.location.href = `coin.html?coinId=${coinId}`;
+        }
+    });
+    
