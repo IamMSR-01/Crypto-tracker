@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Tracker - Real-Time Prices & Market Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
+</head>
+<body class="bg-gray-900 text-white">
+    
+
+    <!-- Navbar -->
+    <nav class="bg-gray-900 text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-3">
+                <img src="https://cdn.pixabay.com/photo/2021/05/09/13/10/finance-6240949_640.png" alt="Crypto Logo" class="w-8 h-8">
+                <span class="text-xl font-bold tracking-wide">Crypto Tracker</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+                <a href="about.html" class="hover:text-blue-400 transition">About</a>
+                <a href="market.html" class="hover:text-blue-400 transition">Market</a>
+                <a href="news.html" class="hover:text-blue-400 transition">News</a>
+                <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+            </div>
+
+            <!-- Dark Mode Toggle / Search Icon -->
+            <div class="flex space-x-4 items-center">
+                <button id="dark-mode-toggle" class="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                    🌙
+                </button>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 bg-gray-800 rounded-md hover:bg-gray-700 transition">
+                ☰
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <a href="index.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">Home</a>
+            <a href="about.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">About</a>
+            <a href="market.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">Market</a>
+            <a href="news.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">News</a>
+            <a href="contact.html" class="block px-6 py-3 hover:bg-gray-700">Contact</a>
+        </div>
+    </nav>
+<!-- Search Bar -->
+<div class="flex justify-center mt-6 px-4">
+    <input type="text" id="search" placeholder="Search Cryptocurrency..." 
+        class="p-2 w-full sm:w-3/4 md:w-1/2 bg-gray-700 text-white rounded-md outline-none">
+</div>
+    
+<!-- Crypto List -->
+<div class="mt-6 px-4 sm:px-10 overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr class="bg-gray-700 rounded-5xl text-sm sm:text-base">
+                <th class="p-2">Coin</th>
+                <th class="p-2">Symbol</th>
+                <th class="p-2">Price</th>
+                <th class="p-2">24h Change</th>
+                <th class="p-2">Price Graph</th>
+            </tr>
+        </thead>
+        <tbody id="crypto-table">
+            <!-- Data will be inserted dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Graph Section -->
+<div class="mt-10 max-w-4xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-white mb-4">Top 5 Cryptos Price Trends</h2>
+    <div class="w-full overflow-hidden">
+        <canvas id="cryptoChart" class="mt-4"></canvas>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-6 mt-10">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+        <div class="flex items-center space-x-2">
+            <img src="https://cdn.pixabay.com/photo/2021/05/09/13/10/finance-6240949_640.png" alt="Crypto Tracker Logo" class="w-8 h-8">
+            <span class="text-lg font-semibold">Crypto Tracker</span>
+        </div>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">Home</a>
+            <a href="about.html" class="text-gray-400 hover:text-blue-400 transition">About</a>
+            <a href="market.html" class="text-gray-400 hover:text-blue-400 transition">Market</a>
+            <a href="news.html" class="text-gray-400 hover:text-blue-400 transition">News</a>
+            <a href="contact.html" class="text-gray-400 hover:text-blue-400 transition">Contact</a>
+        </div>
+        <div class="text-gray-500 text-sm mt-4 md:mt-0">
+            <p>&copy; 2025 Crypto Tracker. All Rights Reserved.</p>
+            <p>Powered by <a href="https://www.coingecko.com/" target="_blank" class="text-blue-400 hover:underline">CoinGecko API</a></p>
+        </div>
+    </div>
+</footer>
+    
+    <script src="main.js"></script>
+</body>
+</html>

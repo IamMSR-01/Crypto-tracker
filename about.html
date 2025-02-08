@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Tracker - Real-Time Prices & Market Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
+</head>
+
+<body class="bg-black">
+
+
+    <!-- Navbar -->
+    <nav class="bg-gray-900 text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-3">
+                <img src="https://cdn.pixabay.com/photo/2021/05/09/13/10/finance-6240949_640.png" alt="Crypto Logo" class="w-8 h-8">
+                <span class="text-xl font-bold tracking-wide">Crypto Tracker</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+                <a href="about.html" class="hover:text-blue-400 transition">About</a>
+                <a href="market.html" class="hover:text-blue-400 transition">Market</a>
+                <a href="news.html" class="hover:text-blue-400 transition">News</a>
+                <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+            </div>
+
+            <!-- Dark Mode Toggle / Search Icon -->
+            <div class="flex space-x-4 items-center">
+                <button id="dark-mode-toggle" class="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                    🌙
+                </button>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 bg-gray-800 rounded-md hover:bg-gray-700 transition">
+                ☰
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <a href="index.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">Home</a>
+            <a href="about.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">About</a>
+            <a href="market.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">Market</a>
+            <a href="news.html" class="block px-6 py-3 border-b border-gray-700 hover:bg-gray-700">News</a>
+            <a href="contact.html" class="block px-6 py-3 hover:bg-gray-700">Contact</a>
+        </div>
+    </nav>
+
+<!-- About Section -->
+<section
+class="container mx-auto my-12 bg-gray-900 shadow-lg rounded-lg flex flex-col lg:flex-row gap-10 px-6 md:px-10 py-6">
+<div class="lg:w-1/2 w-full">
+    <h1 class="text-4xl font-bold text-white mb-4">About Us</h1>
+    <p class="text-gray-300 leading-relaxed">
+        Welcome to Crypto Tracker! We are dedicated to providing the best insights into cryptocurrency markets.
+        Our team is passionate about delivering high-quality content and innovative solutions to help you make
+        informed decisions.
+    </p>
+    <p class="text-gray-300 leading-relaxed mt-4">
+        Our mission is to make crypto tracking simple, efficient, and user-friendly. We aim to keep you updated
+        with the latest trends,
+        price fluctuations, and market news in real-time, ensuring that you stay ahead in the crypto world.
+    </p>
+    <p class="text-gray-300 leading-relaxed mt-4">
+        Join us as we continue to grow, bringing you accurate and up-to-date information, helping you navigate
+        the crypto ecosystem effortlessly.
+    </p>
+</div>
+<div class="lg:w-1/2 w-full flex justify-center">
+    <img class="rounded-xl w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-full"
+        src="https://images.pexels.com/photos/7567535/pexels-photo-7567535.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+        alt="Crypto Image">
+</div>
+</section>
+
+
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+
+            <!-- Logo & Name -->
+            <div class="flex items-center space-x-2">
+                <img src="https://cdn.pixabay.com/photo/2021/05/09/13/10/finance-6240949_640.png" alt="Crypto Tracker Logo"
+                    class="w-8 h-8">
+                <span class="text-lg font-semibold">Crypto Tracker</span>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">Home</a>
+                <a href="about.html" class="text-gray-400 hover:text-blue-400 transition">About</a>
+                <a href="market.html" class="text-gray-400 hover:text-blue-400 transition">Market</a>
+                <a href="news.html" class="text-gray-400 hover:text-blue-400 transition">News</a>
+                <a href="contact.html" class="text-gray-400 hover:text-blue-400 transition">Contact</a>
+            </div>
+
+            <!-- Copyright & API Credit -->
+            <div class="text-gray-500 text-sm mt-4 md:mt-0">
+                <p>&copy; 2025 Crypto Tracker. All Rights Reserved.</p>
+                <p>Powered by <a href="https://www.coingecko.com/" target="_blank"
+                        class="text-blue-400 hover:underline">CoinGecko API</a></p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+
+        // Dark Mode Toggle
+        document.getElementById("dark-mode-toggle").addEventListener("click", function () {
+            document.body.classList.toggle("bg-gray-900");
+            document.body.classList.toggle("bg-white");
+            document.body.classList.toggle("text-black");
+        });
+
+        // Mobile Menu Toggle
+    document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+    });
+    </script>
+
+</body>
+
+</html>
